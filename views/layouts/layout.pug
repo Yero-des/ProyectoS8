@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title Lista de Posts
+    link(rel="stylesheet", href="/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/font/bootstrap-icons.min.css")
+
+  body
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container
+        a.navbar-brand(href="/posts/list") Red social
+        button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarNav
+          ul.navbar-nav
+            li.nav-item
+              a.nav-link(href="/posts/create") Nuevo post
+    
+    block content     
+
+    script(src="/js/bootstrap.min.js")                  
+

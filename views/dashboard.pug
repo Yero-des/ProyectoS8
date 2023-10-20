@@ -1,0 +1,43 @@
+extends layouts/layout
+
+block content
+  .container.mt-5.mb-5
+    .row
+      each post in documents
+        - const collapseId = `commentCollapse${post._id}` 
+        .col-md-6
+          .post-container
+            .card
+              .card-header.d-flex.justify-content-between
+                .div
+                  h2= post.titulo
+                  p= post.descripcion
+                  p Categoría: #{post.categoria}
+                  p Fecha: #{post.fecha}
+                .div.d-flex.align-items-end
+                  button(type="button", class="btn btn-primary" data-bs-toggle="modal" data-bs-target=`#exampleModal-${post._id}`) 
+                    i.bi.bi-chat-right-text
+                  a(href=`/posts/show/${post._id}` class="btn btn-warning text-light" style="margin-left: 1rem;")
+                    i.bi.bi-pencil-square
+                  form(action=`/posts/delete/${post._id}`, method="POST" style="margin-left: 1rem;")
+                    button(type="submit" class="btn btn-danger") 
+                      i.bi.bi-trash
+
+        div(class="modal fade" id=`exampleModal-${post._id}` tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true")
+          div.modal-dialog
+            div.modal-content
+              div.modal-header
+                div.d-flex
+                  h1.modal-title.fs-5 Comentarios
+                  a(href=`/comments/create/${post._id}`) 
+                    i.bi.bi-plus
+                button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+              div.modal-body 
+                each comentario, index in post.comentarios
+                  - const comment_id = `${index}`
+                  .comment
+                    p Autor: #{comentario.autor}
+                    p Mensaje: #{comentario.mensaje}
+                    p Fecha del comentario: #{comentario.fecha}  
+                    a(href=`/comments/update/${post._id}/${comment_id}` class="btn btn-warning")
+                      i.bi.bi-pencil-square

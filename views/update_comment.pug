@@ -1,0 +1,28 @@
+extends layouts/layout
+
+block content 
+
+  h1(style="text-align: center; margin-top: 20px;") Actualizar Comentario
+
+  form(action="/comments/update", method="POST" style="max-width: 400px; margin: 0 auto;")
+    
+    //- Id del post donde se actualizara el comentario
+    input(type="hidden", name="_id", id="_id", class="form-control" value=`${post._id}`)
+    
+    //- Id del indice del comentario para us 
+    input(type="hidden", name="_id_comment", id="_id_comment", class="form-control" value=`${comment_id}`)
+
+    .form-group
+      label(for="autor") Autor:
+      input(type="text", name="autor", id="autor", class="form-control" value=`${post.comentarios[comment_id].autor}`)
+
+    .form-group
+      label(for="mensaje") Mensaje:
+      textarea(name="mensaje", id="mensaje", rows="4", class="form-control") #{post.comentarios[comment_id].mensaje}
+
+    .form-group
+      label(for="fecha") Fecha:
+      input(type="date", name="fecha", id="fecha", class="form-control" value=`${post.comentarios[comment_id].fecha}`)
+
+    .form-group(style="text-align: center; margin-top: 20px;")
+      button(type="submit", class="btn btn-primary") Actualizar Comentario
